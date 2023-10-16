@@ -3,16 +3,12 @@ package com.valorfuturoenergia.vfe.config;
 import java.time.Instant;
 import java.util.Arrays;
 
+import com.valorfuturoenergia.vfe.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.valorfuturoenergia.vfe.entities.Category;
-import com.valorfuturoenergia.vfe.entities.Order;
-import com.valorfuturoenergia.vfe.entities.OrderItem;
-import com.valorfuturoenergia.vfe.entities.Product;
-import com.valorfuturoenergia.vfe.entities.User;
 import com.valorfuturoenergia.vfe.entities.enums.OrderStatus;
 import com.valorfuturoenergia.vfe.repositories.CategoryRepository;
 import com.valorfuturoenergia.vfe.repositories.OrderItemRepository;
@@ -81,6 +77,8 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
-
+        Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"),o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
     }
 }
