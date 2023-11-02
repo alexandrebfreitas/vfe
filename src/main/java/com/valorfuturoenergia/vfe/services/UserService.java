@@ -2,6 +2,7 @@ package com.valorfuturoenergia.vfe.services;
 
 import com.valorfuturoenergia.vfe.entities.User;
 import com.valorfuturoenergia.vfe.repositories.UserRepository;
+import com.valorfuturoenergia.vfe.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class UserService {
     }
     public User findById(Long id){
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(()-> new ResourceNotFoundException(id)) ;
     }
     public User insert(User obj){
         return repository.save(obj);
